@@ -7,8 +7,61 @@
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
+class Inhabitant extends Object{
+    constructor(name,gender,species){
+        super();
+        this.name=name;
+        this.gender=gender;
+        this.species = species;
+    }
+}
+class Human extends Inhabitant{
+    constructor(...props){
+        super(...props)
+        this.legs = 2;
+        this.hands = 2;
+        this.tail = false;
+        this.saying = "Hello!"
+    }
+}
+class Cats extends Inhabitant {
+    constructor(...props){
+        super(...props);
+        this.saying = "Meow!";
+    }
+}
+class HomeCat extends Cats{
+    constructor(...props){
+        super(...props)
+        this.legs = 4;
+        this.tail = 1;
+        this.mustache = 1;
+    }
+}
+class CatWoman extends Human{
+    constructor(...props){
+        super(...props)
+        this.saying = (new Cats).saying;
+    }
+}
 
+class Bird extends Inhabitant{
+        constructor(...props){
+            console.log(props);
+            console.log(...props)
+            super(...props)
+            this.legs = 2;
+            this.wings = 2;
+            this.tail = true;
+            this.saying = "I'm a bird!"
+        }
+}
 
+let bird = new Bird('It\'s a bird!','male','bird');
+let man = new Human('Jack','male','human');
+let cat = new HomeCat('puff','male','cat');
+let catWoman = new CatWoman('Holly','female','Cat-woman');
+let woman = new Human('Jessy','female','human');
 // ======== OUTPUT ========
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
@@ -17,7 +70,13 @@
    However, please, REFRAIN from improving visuals at least until your code is reviewed
    so code reviewers might focus on a single file that is index.js.
    */
-
+    const inhabits = [bird, cat, man, woman, catWoman];
+    inhabits.forEach(item=>{
+        let stringToPrint = '';
+        for(let value of Object.values(item))
+            stringToPrint+=`${value};`
+        print(stringToPrint);
+    })
 /* Print examples:
    print('ABC');
    print('<strong>ABC</strong>');
@@ -27,5 +86,3 @@
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-
-

@@ -8,7 +8,7 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant extends Object {
-	constructor(name, gender, species) {
+	constructor(name = "Unknown name", gender = "undefined gender", species = "Human, may be...") {
 		super()
 		this.name = name
 		this.gender = gender
@@ -59,7 +59,7 @@ let bird = new Bird("It's a bird!", "male", "bird")
 let man = new Human("Jack", "male", "human")
 let cat = new HomeCat("puff", "male", "cat")
 let catWoman = new CatWoman("Holly", "female", "Cat-woman")
-let woman = new Human("Jessy", "female", "human")
+let woman = new Human(/* "Jessy", "female", "human" */)
 // ======== OUTPUT ========
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
@@ -68,24 +68,28 @@ let woman = new Human("Jessy", "female", "human")
    However, please, REFRAIN from improving visuals at least until your code is reviewed
    so code reviewers might focus on a single file that is index.js.
    */
-const inhabits = [bird, cat, man, woman, catWoman]
-const inhabitantObjectKeys = [
-	"species",
-	"name",
-	"gender",
-	"legs",
-	"hands",
-	"wings",
-	"saying",
-	"mustache",
-]
-inhabits.forEach((inhabitant) => {
-	let stringToPrint = ""
-	inhabitantObjectKeys.forEach((key) => {
-		if (inhabitant.hasOwnProperty(key)) stringToPrint += `${inhabitant[key]}; `
+const printInhabitants = () => {
+	const inhabits = [bird, cat, man, woman, catWoman]
+	const inhabitantObjectKeys = [
+		"species",
+		"name",
+		"gender",
+		"legs",
+		"hands",
+		"wings",
+		"saying",
+		"mustache",
+	]
+	inhabits.forEach((inhabitant) => {
+		print(
+			inhabitantObjectKeys
+				.filter((key) => inhabitant.hasOwnProperty(key))
+				.map((key) => inhabitant[key])
+				.join("; ")
+		)
 	})
-	print(stringToPrint)
-})
+}
+printInhabitants()
 /* Print examples:
    print('ABC');
    print('<strong>ABC</strong>');
